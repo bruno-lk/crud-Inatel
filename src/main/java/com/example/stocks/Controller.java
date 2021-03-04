@@ -1,6 +1,7 @@
 package com.example.stocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,5 +64,14 @@ public class Controller {
 	public @ResponseBody Stock getStock(@PathVariable String name) {
 			
 		return stockRepository.findByName(name);
+	}
+	
+	@DeleteMapping("/stock/{name}")
+	public @ResponseBody void deleteStock(@PathVariable String name) {
+			
+		Stock stock = stockRepository.findByName(name);
+		stockRepository.delete(stock);
+		
+		
 	}
 }
